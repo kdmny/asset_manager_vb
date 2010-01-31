@@ -3,7 +3,8 @@
 ## Getting Started
 
 1. Add an assembly reference to AssetManager.dll
-2. Add this to your web.config
+2. Add this to your web.config  
 `code here`
-3. Use it in your views and layouts like so:
-
+3. Use it in your views and layouts like so:  
+`here is one thing`  
+`here is something else`
