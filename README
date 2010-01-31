@@ -1,0 +1,9 @@
+h1. InspectorMu's VB.NET AssetManager
+
+h2. Getting Started
+
+# Add an assembly reference to AssetManager.dll
+# Add this to your web.config
+//code here
+# Use it in your views and layouts like so:
+
