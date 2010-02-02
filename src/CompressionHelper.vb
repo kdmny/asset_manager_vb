@@ -32,7 +32,7 @@ Namespace com.InspectorMu.Web
                 path = context.Server.MapPath(path)
                 If File.Exists(path) Then
                     Try
-                        builder.AppendLine(File.ReadAllText(path))
+                        builder.AppendLine(File.ReadAllText(path).Replace("url(", "url(" + AssetManager.UrlPrepend))
                     Catch ex As Exception
                         'Warning need to add email messaging
                     End Try

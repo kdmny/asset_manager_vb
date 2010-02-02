@@ -4,7 +4,7 @@ Imports System.Configuration
 Imports System.IO
 Imports System.Text
 Imports System.Web
-'using Musicane.Core;
+
 
 Namespace com.InspectorMu.Web
     Public Class AssetManager
@@ -12,7 +12,7 @@ Namespace com.InspectorMu.Web
 
         Private Shared separator As String = "%2f"
         Private Shared ReadOnly scriptCombining As Boolean
-        Private Shared ReadOnly staticResourceUrlPrepend As String
+        Private Shared ReadOnly staticResourceUrlPrepend
         Private Shared ReadOnly defaultUrlPrepend As String
         Private Shared ReadOnly amazonCdnPrepend As String
         Protected Shared ReadOnly unixTimeStart As New DateTime(1970, 1, 1)
@@ -27,11 +27,8 @@ Namespace com.InspectorMu.Web
 
 #Region "Constructors"
         Shared Sub New()
-            scriptCombining = True 'Convert.ToBoolean(ConfigurationManager.AppSettings("ScriptCombining"))
-            staticResourceUrlPrepend = "http://localhost:49721" 'ConfigurationManager.AppSettings("StaticResourceDomain")
-            defaultUrlPrepend = "http://localhost:49721" 'ConfigurationManager.AppSettings("DefaultHostName")
-            'staticResourceUrlPrepend = If(staticResourceUrlPrepend, defaultUrlPrepend)
-            'amazonCdnPrepend = ConfigurationManager.AppSettings("AmazonCdnPrepend")
+            scriptCombining = True
+            staticResourceUrlPrepend = ConfigurationManager.AppSettings("StaticResourceDomain")
         End Sub
 
         Protected Sub New()
@@ -47,6 +44,12 @@ Namespace com.InspectorMu.Web
             End Get
         End Property
 
+        Public Shared ReadOnly Property UrlPrepend() As String
+            Get
+                Return staticResourceUrlPrepend
+            End Get
+        End Property
+
         Public ReadOnly Property CssIncludes() As List(Of String)
             Get
                 Return m_cssIncludes
@@ -58,6 +61,7 @@ Namespace com.InspectorMu.Web
                 Return m_jsIncludes
             End Get
         End Property
+
 #End Region
 
 #Region "Methods"
