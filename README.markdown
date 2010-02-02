@@ -12,24 +12,25 @@ Add an assembly reference to com.InspectorMu.Web.dll
 
 Add this to your web.config:  
 `<system.web>
-  ....
+  ...
   <httpHandlers>
     ....
     <add path="*.cjs" verb="*" type="com.InspectorMu.Web.CompressJsHandler, com.InspectorMu.Web"/>
     <add path="*.ccss" verb="*" type="com.InspectorMu.Web.CompressCssHandler, com.InspectorMu.Web"/>
     ....
   <httpHandlers>
-  <httpModules>
+  <httpModules> 
     ....
-    <add name="AssetModule" type="com.InspectorMu.Web.AssetModule, com.InspectorMu.Web"/>
+    <add name="AssetModule" type="com.InspectorMu.Web.AssetModule, com.InspectorMu.Web"/> 
     ....
-  </httpModules> 
-...
+  </httpModules>
+... 
 </system.web>`
 
 #### IIS 7
 
 Add this to your web.config:  
+
 `<system.webServer>
   ....
       <modules>
@@ -47,14 +48,16 @@ Add this to your web.config:
 
 ### Use it in your views
 
-Add this at the top of your view (aspx/layout) *note there is no extension required*:  
+Add this at the top of your view (aspx/layout) *note there is no extension required*: 
+ 
 `<%@ Import Namespace="com.InspectorMu.Web" %`
 
 Include some js files:  
+
 `<% AssetManager.Instance.JsIncludes.Add("path/from/root/to/jsfile1")%>
-<% AssetManager.Instance.JsIncludes.Add("path/from/root/to/jsfile2")%>    
+<% AssetManager.Instance.JsIncludes.Add("path/from/root/to/jsfile2")%> 
 <% AssetManager.Instance.JsIncludes.Add("path/from/root/to/jsfileN")%>
-<%=AssetManager.GetJsScriptTag()%>``
+<%=AssetManager.GetJsScriptTag()%>`
 
 InspectorMu's asset manager also works with css files *note there is no extension required*:  
 
