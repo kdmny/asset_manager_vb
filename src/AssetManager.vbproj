@@ -61,31 +61,31 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\AssetManager.vb" />
-    <Compile Include="src\AssetModule.vb" />
-    <Compile Include="src\CompressCssHandler.vb" />
-    <Compile Include="src\CompressionHelper.vb" />
-    <Compile Include="src\CompressJsHandler.vb" />
-    <Compile Include="src\MimeType.vb" />
-    <Compile Include="src\MimeTypeHelper.vb" />
-    <Compile Include="src\My Project\AssemblyInfo.vb" />
-    <Compile Include="src\My Project\Application.Designer.vb">
+    <Compile Include="AssetManager.vb" />
+    <Compile Include="AssetModule.vb" />
+    <Compile Include="CompressCssHandler.vb" />
+    <Compile Include="CompressionHelper.vb" />
+    <Compile Include="CompressJsHandler.vb" />
+    <Compile Include="MimeType.vb" />
+    <Compile Include="MimeTypeHelper.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
-    <Compile Include="src\My Project\Resources.Designer.vb">
+    <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="src\My Project\Settings.Designer.vb">
+    <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="src\My Project\Resources.resx">
+    <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
@@ -93,11 +93,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\My Project\Application.myapp">
+    <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
-    <None Include="src\My Project\Settings.settings">
+    <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
