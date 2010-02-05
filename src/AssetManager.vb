@@ -143,7 +143,7 @@ Namespace com.InspectorMu.Web
             Dim newestTime As DateTime = DateTime.MinValue
             builder.AppendFormat("/images/{0}.jpg?id=", fileNameNoExtension)
 
-            Dim path As String = String.Format("~/images/{0}.jpg", fileNameNoExtension)
+            Dim path As String = String.Format("~/{0}", fileNameNoExtension)
             path = HttpContext.Current.Server.MapPath(path)
             Dim time As DateTime = File.GetLastWriteTimeUtc(path)
             If time > newestTime Then
@@ -153,6 +153,43 @@ Namespace com.InspectorMu.Web
             builder.AppendFormat("&timestamp={0}", unixTime)
             ' Version via Unix time.
 
+            Return builder.ToString()
+        End Function
+
+        Public Shared Function ImageTag(ByVal imgAppRelativePath As String) As String
+
+            Dim builder As New StringBuilder()
+            Dim newestTime As DateTime = DateTime.MinValue
+            Dim path As String = imgAppRelativePath
+            If Not path.StartsWith("~") Then
+                path = "~" & path
+            End If
+            path = HttpContext.Current.Server.MapPath(path)
+            Dim time As DateTime = File.GetLastWriteTimeUtc(path)
+            If time > newestTime Then
+                newestTime = time
+            End If
+            Dim unixTime As Integer = GetUnixTimeFromUniversalTime(newestTime)
+            builder.AppendFormat("<img src=""{0}{1}?{2}"" />", staticResourceUrlPrepend, imgAppRelativePath, unixTime)
+            ' Version via Unix time.
+            Return builder.ToString()
+        End Function
+
+        Public Shared Function ImageTag(ByVal imgAppRelativePath As String, ByVal width As Int32, ByVal height As Int32) As String
+            Dim builder As New StringBuilder()
+            Dim newestTime As DateTime = DateTime.MinValue
+            Dim path As String = imgAppRelativePath
+            If Not path.StartsWith("~") Then
+                path = "~" & path
+            End If
+            path = HttpContext.Current.Server.MapPath(path)
+            Dim time As DateTime = File.GetLastWriteTimeUtc(path)
+            If time > newestTime Then
+                newestTime = time
+            End If
+            Dim unixTime As Integer = GetUnixTimeFromUniversalTime(newestTime)
+            builder.AppendFormat("<img src=""{0}{1}?{2}"" width=""{3}"" height=""{4}"" />", staticResourceUrlPrepend, imgAppRelativePath, unixTime, width, height)
+            ' Version via Unix time.
             Return builder.ToString()
         End Function
 
