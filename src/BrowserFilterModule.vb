@@ -30,7 +30,7 @@ Namespace com.InspectorMu.Web
         End Sub
 
         Private Function FilterBrowser(ByRef app As HttpApplication) As Boolean            
-            Return Regex.IsMatch(app.Context.Request.UserAgent, "^.*MSIE [3|4|5|6].*$") And Not app.Context.Request.Path.Contains("/IEUpgrade.aspx")
+            Return (Regex.IsMatch(app.Context.Request.UserAgent, "^.*MSIE [0-6].*$") Or Regex.IsMatch(app.Context.Request.UserAgent, "^.*Firefox\/[0-2].*$") Or Regex.IsMatch(app.Context.Request.UserAgent, "^.*Firefox\/[3]\.[0-4]*$")) And Not app.Context.Request.Path.Contains("/IEUpgrade.aspx") And (app.Context.Request.Cookies("forcebrowser") Is Nothing)
         End Function
 #End Region
 
