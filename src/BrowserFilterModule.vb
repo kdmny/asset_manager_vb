@@ -1,16 +1,26 @@
 ﻿Imports Microsoft.VisualBasic
 Imports System.Web
 Imports System.Text.RegularExpressions
+Imports System.Configuration
+
 Namespace com.InspectorMu.Web
     Public Class BrowserFilterModule
         Implements IHttpModule
 
 #Region "Methods"
+        Shared deniedBrowsers As String
+        Shared allowAccessOnDeny As String
+        Shared Sub New()
+            deniedBrowsers = ConfigurationManager.AppSettings("deniedBrowsers")
+            allowAccessOnDeny = ConfigurationManager.AppSettings("allowAccessOnDeny")
+        End Sub
+
 
         Public Sub Init(ByVal app As HttpApplication) _
    Implements IHttpModule.Init
             AddHandler app.BeginRequest, _
                AddressOf MyBeginRequest
+
         End Sub
 
         Public Sub Dispose() Implements IHttpModule.Dispose
@@ -24,13 +34,29 @@ Namespace com.InspectorMu.Web
             If FilterBrowser(app) Then
                 app.Context.Response.Redirect("~/IEUpgrade.aspx")
             End If
-
-
-
         End Sub
 
-        Private Function FilterBrowser(ByRef app As HttpApplication) As Boolean            
-            Return (Regex.IsMatch(app.Context.Request.UserAgent, "^.*MSIE [0-6].*$") Or Regex.IsMatch(app.Context.Request.UserAgent, "^.*Firefox\/[0-2].*$") Or Regex.IsMatch(app.Context.Request.UserAgent, "^.*Firefox\/[3]\.[0-4]*$")) And Not app.Context.Request.Path.Contains("/IEUpgrade.aspx") And (app.Context.Request.Cookies("forcebrowser") Is Nothing)
+        Private Function FilterBrowser(ByRef app As HttpApplication) As Boolean
+            Dim path As String = app.Context.Request.Path.ToLower
+
+            'Customer want to go at their own risk..
+            If Not (app.Context.Request.Cookies("forcebrowser") Is Nothing) Then
+                Return False
+            End If
+
+            'Things to allow
+            If Regex.IsMatch(path, allowAccessOnDeny, RegexOptions.IgnoreCase) Then
+                Return False
+            End If
+
+
+            'Things to deny
+            If Regex.IsMatch(app.Context.Request.UserAgent, deniedBrowsers, RegexOptions.IgnoreCase) Then
+                Return True
+            End If
+
+
+            Return False
         End Function
 #End Region
 
